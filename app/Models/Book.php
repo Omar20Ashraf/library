@@ -11,5 +11,13 @@ class Book extends Model
 
     protected $table = 'books';
 
-    protected $fillable = ['title','author'];
+    protected $fillable = ['title', 'author_id'];
+
+    public function setAuthorIdAttribute($author)
+    {
+        # code...
+        $this->attributes['author_id'] = Author::firstOrCreate([
+            'name' => $author
+        ])->id;
+    }
 }
